@@ -1,0 +1,18 @@
+{
+    "openai": {
+        "model": "gpt-4o",
+        "api_base": "https://api.openai.com/v1"
+    },
+    "anthropic": {
+        "model": "claude-3-5-sonnet-20240620",
+        "api_base": "https://api.anthropic.com"
+    },
+    "google": {
+        "model": "gemini-2.5-flash",
+        "api_base": "https://generativelanguage.googleapis.com/v1beta/models"
+    },
+    "ollama": {
+        "model": "qwen2.5:7b",
+        "api_base": "http://localhost:11434"
+    }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Ilija – Offenes Leuchten</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="scanline"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-area">
+                <span class="logo-dot"></span>
+                <div>
+                    <h1>ILIJA</h1>
+                    <span class="subtitle">Offenes Leuchten v5.0 · Autonomer KI-Agent</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <select id="provider-select" class="provider-select">
+                    <option value="auto">Auto</option>
+                </select>
+                <button id="reload-btn" class="btn-icon" title="Skills neu laden" onclick="reloadSkills()">↻</button>
+                <button id="clear-btn" class="btn-icon btn-danger" title="Chat löschen">✕</button>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar" id="stats-bar">
+            <span id="provider-status">● –</span>
+            <span id="skills-count">⬡ –</span>
+            <span id="message-count">↕ 0</span>
+            <span id="reload-status" class="reload-status"></span>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chat-container">
+            <div class="message bot-message">
+                <div class="message-header">ILIJA</div>
+                <div class="message-content">System bereit. Wie kann ich helfen?</div>
+                <div class="message-meta">
+                    <span class="intent-badge">SYSTEM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typing-indicator" style="display: none;">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-text">Ilija verarbeitet...</span>
+        </div>
+
+        <!-- Upload Preview -->
+        <div class="upload-preview" id="upload-preview" style="display:none;">
+            <span id="upload-preview-name"></span>
+            <button onclick="cancelUpload()" class="btn-cancel-upload">✕</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="upload-buttons">
+                <!-- Mikrofon: Live-Aufnahme via MediaRecorder -->
+                <button id="mic-btn" class="btn-upload" title="Sprachnachricht aufnehmen" onclick="toggleRecording()">🎙</button>
+
+                <!-- Datei-Upload -->
+                <label class="btn-upload" title="Datei hochladen (PDF, DOCX, TXT, Code...)">
+                    📎
+                    <input type="file" id="file-input"
+                           accept=".pdf,.docx,.doc,.txt,.md,.py,.js,.ts,.json,.csv,.xml,.yaml,.yml,.sh"
+                           style="display:none"
+                           onchange="handleFileUpload(this)">
+                </label>
+            </div>
+
+            <textarea
+                id="message-input"
+                class="message-input"
+                placeholder="Nachricht eingeben…"
+                rows="1"></textarea>
+
+            <button id="send-btn" class="btn-send" title="Senden">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
