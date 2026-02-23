@@ -1,7 +1,10 @@
-# 🤖 Projekt Offenes Leuchten -- KI Agent Ilija
+# 🤖 Ilija – Autonomer KI-Agent v5.0
 
-Ein selbst-erweiterndes KI-Agent-System mit Langzeitgedächtnis.  
-Der Agent **Ilija** kann neue Fähigkeiten (Skills) zur Laufzeit generieren, speichern und direkt nutzen – ohne Neustart.
+> **Offenes Leuchten** – Ein selbst-erweiterndes KI-Agent-System mit Langzeitgedächtnis,
+> WhatsApp-Integration, Telegram-Fernsteuerung und modernem Web-Interface.
+
+Der Agent **Ilija** denkt selbst, plant seine Schritte und bringt sich neue Fähigkeiten
+zur Laufzeit bei – ohne Neustart.
 
 ---
 
@@ -9,74 +12,100 @@ Der Agent **Ilija** kann neue Fähigkeiten (Skills) zur Laufzeit generieren, spe
 
 - **Multi-Provider**: Claude (Anthropic), ChatGPT (OpenAI), Gemini (Google), Ollama (lokal)
 - **Auto-Fallback**: wählt automatisch den besten verfügbaren Provider
-- **Selbst-Entwicklung**: Ilija erstellt neue Skills on-the-fly via `skill_erstellen`
-- **Langzeitgedächtnis**: ChromaDB-basiertes Vektorspeicher-System
-- **Web-Interface**: lokales Flask-Web-UI (v5.0)
-- **Terminal-Modus**: klassische CLI (v4.0)
-- **Telegram-Interface**: Arbeite mit Ilija über Telegram und nutze Telegram als vollumfängliches Interface
-- **WhatsApp-Integration**: Ilija verwaltet WhatsApp - Nachrichten, schreibt mit Kontakten und vereinbart Termine
+- **Selbst-Entwicklung**: Ilija erstellt neue Skills on-the-fly – einfach beschreiben, was du brauchst
+- **Langzeitgedächtnis**: ChromaDB-basiertes Vektorspeicher-System – dauerhaft, auch nach Neustart
+- **Web-Interface**: modernes Browser-Chat mit Mikrofon, Datei-Upload & Skill-Reload
+- **Telegram-Interface**: vollständige Fernsteuerung per Telegram – Text, Sprache, Bilder, Dateien
+- **WhatsApp-Integration**: Ilija überwacht Chats, schreibt Kontakte an und vereinbart Termine
+- **Terminal-Modus**: klassische CLI für Entwickler
+
 ---
 
 ## 🚀 Schnellstart
 
-### 1. Repository klonen
+### Option A – Automatisch mit install.sh (empfohlen)
 
 ```bash
-git clone https://github.com/<dein-user>/offenes-leuchten.git
-cd offenes-leuchten
+git clone https://github.com/Innobytix-IT/ilija-AI-Agent.git
+cd ilija-AI-Agent/Ilija_evo2_full
+chmod +x install.sh
+./install.sh
 ```
 
-### 2. Abhängigkeiten installieren
+Das Skript führt dich interaktiv durch alle 7 Schritte:
+Ollama, alle Python-Pakete, Google Chrome, Whisper, API-Keys, Telegram-Bot-Einrichtung und Startmodus-Auswahl.
+
+### Option B – Manuell
 
 ```bash
+git clone https://github.com/Innobytix-IT/ilija-AI-Agent.git
+cd ilija-AI-Agent/Ilija_evo2_full
+
+# Virtuelle Umgebung erstellen
+python3 -m venv venv
+source venv/bin/activate
+
+# Abhängigkeiten installieren
 pip install -r requirements.txt
-```
 
-### 3. API Keys konfigurieren
-
-```bash
+# API Keys konfigurieren
 cp .env.example .env
-# .env öffnen und mindestens einen API Key eintragen
+# .env öffnen und mindestens einen Key eintragen
+
+# Starten
+python web_server.py   # → http://localhost:5000
 ```
 
-### 4. Starten
+---
 
-**Web-Interface (empfohlen):**
+## ▶️ Starten
+
 ```bash
-python web_server.py
-# → http://localhost:5000
+cd ilija-AI-Agent/Ilija_evo2_full
+source venv/bin/activate
 ```
 
-**Terminal-Modus:**
-```bash
-python main_v4_cloud.py
-# Mit bestimmtem Provider: python main_v4_cloud.py --provider claude
-```
+| Interface | Befehl | Erreichbar unter |
+|-----------|--------|-----------------|
+| Web-Interface | `python web_server.py` | http://localhost:5000 |
+| Telegram-Bot | `python telegram_bot.py` | Telegram-App |
+| Beide gleichzeitig | `python telegram_bot.py & python web_server.py` | Beides parallel |
+| Terminal-Modus | `python kernel.py` | Direkt in der Konsole |
 
 ---
 
 ## 📁 Projektstruktur
 
 ```
-offenes_leuchten/
-├── main_v4_cloud.py        # Terminal-Agent (v4.0)
-├── web_server.py           # Flask Web-Server (v5.0)
-├── skill_manager.py        # Dynamisches Laden & Ausführen von Skills
-├── agent_state.py          # Zustandsautomat des Agenten
-├── skill_registry.py       # Skill-Status & Schutzmechanismus
-├── model_registry.py       # Dynamische Modell-Konfiguration
-├── models_config.json      # Aktuelle Modell-Einstellungen
-├── skills/                 # Skill-Bibliothek (erweiterbar)
-│   ├── basis_tools.py      # Shell, Datei, Zeit
-│   ├── gedaechtnis.py      # ChromaDB Langzeitgedächtnis
-│   ├── skill_factory_improved.py  # Skill-Erstellung zur Laufzeit
+Ilija_evo2_full/
+├── install.sh                  # Interaktives Installationsskript (empfohlen)
+├── web_server.py               # Flask Web-Interface
+├── telegram_bot.py             # Telegram-Bot
+├── kernel.py                   # Zentraler Agent + Terminal-Modus
+├── providers.py                # KI-Provider (Claude/GPT/Gemini/Ollama)
+├── skill_manager.py            # Dynamisches Skill-Laden & Ausführen
+├── agent_state.py              # Zustandsautomat
+├── autonomy_loop.py            # Autonomie-Loop
+├── skill_policy.py             # Sicherheits-Layer (SAFE/INTERACTIVE/RISKY)
+├── skill_scoring.py            # Skill-Bewertung & Statistiken
+├── skill_versioning.py         # Versionierung & automatische Backups
+├── skill_validator.py          # Skill-Code-Validierung
+├── skill_registry.py           # Geschützte Skills & Status-Verwaltung
+├── model_registry.py           # Dynamische Modell-Konfiguration
+├── models_config.json          # Aktuelle Modell-Einstellungen
+├── skills/                     # Skill-Bibliothek (erweiterbar)
+│   ├── basis_tools.py
+│   ├── gedaechtnis.py          # ChromaDB Langzeitgedächtnis
+│   ├── skill_factory_improved.py
+│   ├── whatsapp_autonomer_dialog.py
+│   ├── webseiten_inhalt_lesen.py
 │   └── ...
-├── templates/index.html    # Web-UI Template
-├── static/                 # CSS, JS, Docs
-├── memory/                 # ChromaDB Datenbank (lokal, nicht committet)
-├── requirements.txt
-├── .env.example
-└── .gitignore
+├── templates/index.html        # Web-UI Template
+├── static/                     # CSS, JS
+├── memory/                     # ChromaDB Datenbank (lokal, nicht committet)
+├── .env.example                # Konfigurations-Vorlage
+├── .gitignore
+└── requirements.txt
 ```
 
 ---
@@ -88,39 +117,65 @@ offenes_leuchten/
 | Claude (Anthropic) | `ANTHROPIC_API_KEY` | claude-sonnet-4-20250514 |
 | ChatGPT (OpenAI) | `OPENAI_API_KEY` | gpt-4o |
 | Gemini (Google) | `GOOGLE_API_KEY` | gemini-2.5-flash |
-| Ollama (lokal) | — | qwen2.5:7b |
+| Ollama (lokal) | — | qwen2.5:7b (kein Key nötig) |
 
-Der `auto`-Modus wählt automatisch den ersten verfügbaren Provider (Reihenfolge: Claude → GPT → Gemini → Ollama).
-
-Modelle können zur Laufzeit per Skill geändert werden:
-```
-Du: Zeige mir die aktuellen Modelle
-Du: Ändere das Modell für claude auf claude-opus-4-6
-```
+Der `auto`-Modus wählt automatisch den ersten verfügbaren Provider (Claude → GPT → Gemini → Ollama).
+Ohne Cloud-Key funktioniert Ilija vollständig offline mit einem lokalen Ollama-Modell.
 
 ---
 
-## 🧠 Skills
+## 📱 Telegram-Bot einrichten
 
-Skills sind einfache Python-Dateien im `skills/`-Ordner. Sie werden beim Start und nach jeder Neuerstellung automatisch geladen.
+1. Öffne Telegram und suche **@BotFather**
+2. Tippe `/newbot` → Name eingeben → Username eingeben (muss auf `bot` enden)
+3. Token kopieren und in `.env` eintragen: `TELEGRAM_BOT_TOKEN=...`
+4. Deine User-ID über **@userinfobot** herausfinden: `TELEGRAM_ALLOWED_USERS=...`
+5. Bot starten: `python telegram_bot.py`
 
-### Eigenen Skill erstellen
+Nur deine User-ID kann Ilija steuern – andere Nutzer erhalten keine Antwort.
 
-Jede Skill-Datei braucht eine `AVAILABLE_SKILLS`-Liste:
+---
+
+## 💬 WhatsApp-Integration
+
+Ilija steuert WhatsApp Web automatisch über Google Chrome (Selenium).
+
+**Voraussetzung:** Google Chrome installiert, WhatsApp Web einmalig eingeloggt.
+
+| Modus | Befehl an Ilija |
+|-------|----------------|
+| Einzelnen Kontakt überwachen | `"Überwache Kontakt: [Name]"` |
+| Alle Chats überwachen | `"Überwache alle WhatsApp-Chats"` |
+| Anrufbeantworter | `"Starte WhatsApp-Anrufbeantworter"` |
+| Termine anzeigen | `"Zeig mir den WhatsApp-Kalender"` |
+| Nachrichten abrufen | `"Zeig mir hinterlassene Nachrichten"` |
+
+---
+
+## 🧠 Skill-System
+
+Skills sind Python-Dateien im `skills/`-Ordner. Einfachstes Format:
 
 ```python
 def mein_skill(parameter: str) -> str:
-    """Beschreibung für die KI."""
+    """Beschreibung für die KI – wann soll dieser Skill genutzt werden?"""
     return f"Ergebnis: {parameter}"
 
 AVAILABLE_SKILLS = [mein_skill]
 ```
 
-Alternativ kann Ilija selbst neue Skills generieren – einfach beschreiben, was du brauchst.
+Nach dem Speichern: Reload-Button im Web-Interface oder `/reload` in Telegram.
+
+Oder direkt Ilija bitten:
+```
+"Erstelle einen Skill der das Wetter in Berlin abfragt"
+```
 
 ---
 
-## 💬 Terminal-Befehle
+## 💬 Befehle
+
+**Terminal-Modus (`python kernel.py`):**
 
 | Befehl | Funktion |
 |--------|----------|
@@ -130,20 +185,42 @@ Alternativ kann Ilija selbst neue Skills generieren – einfach beschreiben, was
 | `switch` | Provider wechseln |
 | `exit` | Beenden |
 
+**Telegram:**
+
+| Befehl | Funktion |
+|--------|----------|
+| `/start` | Bot starten |
+| `/reload` | Skills neu laden |
+| `/status` | System-Status |
+| `/help` | Alle Befehle anzeigen |
+
 ---
 
 ## 🛡️ Sicherheit
 
-- Kritische Skills (`skill_erstellen`, `wissen_speichern`, etc.) sind durch `PROTECTED_SKILLS` geschützt
-- Shell-Befehle werden mit 10s Timeout ausgeführt
-- API Keys werden ausschließlich aus `.env` geladen – niemals hardcoded
+- **Skill-Policy**: Drei Stufen – SAFE (automatisch), INTERACTIVE (Bestätigung), RISKY (explizite Genehmigung)
+- **Telegram-Whitelist**: Nur eingetragene User-IDs können Ilija steuern
+- **Geschützte Skills**: `PROTECTED_SKILLS` verhindert Überschreiben kritischer Skills
+- **API Keys**: ausschließlich aus `.env` – niemals hardcoded
+- **WhatsApp**: Kontakte können keine Kernel-Befehle ausführen – nur Dialog-Modus
 
 ---
 
 ## 📋 Anforderungen
 
 - Python 3.10+
-- Mindestens ein API Key oder lokales Ollama
+- Ubuntu / Debian Linux (empfohlen) oder macOS
+- Google Chrome (für WhatsApp-Skill)
+- Mindestens ein API Key **oder** lokales Ollama-Modell
+
+---
+
+## 🔗 Versionshistorie
+
+| Version | Repository |
+|---------|-----------|
+| v1.0 (Ursprung) | [offenes-leuchten](https://github.com/Innobytix-IT/offenes-leuchten) |
+| v5.0 (aktuell) | [ilija-AI-Agent](https://github.com/Innobytix-IT/ilija-AI-Agent) ← du bist hier |
 
 ---
 
