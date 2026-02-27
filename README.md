@@ -28,7 +28,7 @@ chmod +x install.sh
 
 - 🧠 **Langzeitgedächtnis** – ChromaDB, dauerhaft auch nach Neustart
 - ⚡ **Skill-System** – Ilija programmiert sich neue Fähigkeiten selbst
-- 🤖 **Moltbook Netzwerk** Ilija nimmt über den Skill moltbook.py am Moltbook Netzwerk teil
+- 🤖 **Moltbook Netzwerk** – Ilija nimmt über den Skill moltbook.py am Moltbook Netzwerk teil
 - 💬 **WhatsApp** – überwacht Chats, vereinbart Termine, nimmt Nachrichten an
 - 📱 **Telegram** – vollständige Fernsteuerung per App
 - 🌐 **Web-Interface** – Browser-Chat mit Mikrofon & Datei-Upload
